@@ -19,7 +19,7 @@ namespace BackEndAPI.Services.Implementation
             {
                 List<Employee> list = new List<Employee>();
 
-                list = await _dbContext.Employees.Include(dpt => dpt.DepartmentId).ToListAsync();
+                list = await _dbContext.Employees.Include(dpt => dpt.Department).ToListAsync();
 
                 return list;
             }
