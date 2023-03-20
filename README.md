@@ -3,10 +3,13 @@
 This applcation was made with:
 - ASP.NET Core 6
 - SQL Server 2019
+- Without Controllers (Minimalist Views)
 
 Required packages:
 - Microsoft.EntityFrameworkCore.SqlServer 7.0.0
 - Microsoft.EntityFrameworkCore.Tools 7.0.0
+- Automapper 12.0.0
+- AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.0
 
 Use the following command line to add our database context to our project:
 - In Visual Studio, find the "Tools" tab > NuGet Package Manager > Package Manager Console.
