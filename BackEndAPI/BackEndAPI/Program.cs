@@ -4,6 +4,10 @@ using BackEndAPI.Models;
 using BackEndAPI.Services.Contract;
 using BackEndAPI.Services.Implementation;
 
+using AutoMapper;
+using BackEndAPI.DTOs;
+using BackEndAPI.Utilities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,6 +23,9 @@ builder.Services.AddDbContext<DbAngularapiCrudContext>(option => {
 // Add Services
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+
+// Add AutoMapper Profile
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 var app = builder.Build();
 
