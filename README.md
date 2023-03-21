@@ -4,6 +4,7 @@ This applcation was made with:
 - ASP.NET Core 6
 - SQL Server 2019
 - Without Controllers (Minimalist Views)
+- Angular 15.2.2
 
 Required packages:
 - Microsoft.EntityFrameworkCore.SqlServer 7.0.0
