@@ -7,11 +7,15 @@ This applcation was made with:
 - Angular 15.2.2
 - Angular Material 15.2.2
 
-Required packages:
+Required packages in Visual Studio:
 - Microsoft.EntityFrameworkCore.SqlServer 7.0.0
 - Microsoft.EntityFrameworkCore.Tools 7.0.0
 - Automapper 12.0.0
 - AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.0
+
+Required facilities in VS Code:
+- npm install moment --save
+- npm install @angular/material-moment-adapter@15.2.2
 
 Use the following command line to add our database context to our project:
 - In Visual Studio, find the "Tools" tab > NuGet Package Manager > Package Manager Console.
