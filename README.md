@@ -7,13 +7,14 @@ This applcation was made with:
 - Angular 15.2.2
 - Angular Material 15.2.2
 
-Required packages in Visual Studio:
+Required packages in Visual Studio (BackEndAPI Folder):
 - Microsoft.EntityFrameworkCore.SqlServer 7.0.0
 - Microsoft.EntityFrameworkCore.Tools 7.0.0
 - Automapper 12.0.0
 - AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.0
 
-Required facilities in VS Code:
+Required facilities in VS Code (FrontEndAPI Folder):
+- ng add @angular/material@15.2.2
 - npm install moment --save
 - npm install @angular/material-moment-adapter@15.2.2
 
