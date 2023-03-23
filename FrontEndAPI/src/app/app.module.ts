@@ -30,10 +30,12 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 // Grids
 import {MatGridListModule} from '@angular/material/grid-list';
+import { NewEmployeeDialogComponent } from './Modals/new-employee-dialog/new-employee-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NewEmployeeDialogComponent
   ],
   imports: [
     BrowserModule,

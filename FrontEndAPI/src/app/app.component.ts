@@ -5,6 +5,10 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Employee } from './Interfaces/employee';
 import { EmployeeService } from './Services/employee.service';
 
+import {MatDialog} from '@angular/material/dialog';
+
+import { NewEmployeeDialogComponent } from './Modals/new-employee-dialog/new-employee-dialog.component';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,8 +20,9 @@ export class AppComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['Name', 'Department', 'Salary', 'ContractDate', 'Accions'];
   dataSource = new MatTableDataSource<Employee>();
 
-  constructor(private _employeeServices: EmployeeService){
-  }
+  constructor(
+    private _employeeServices: EmployeeService,
+    public dialog: MatDialog){}
 
   ngOnInit(): void {
     this.showEmployees();
@@ -41,6 +46,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.dataSource.data = dataResponse;
       }, error:(e)=>{}
     })
+  }
+
+  newEmployeeDialog() {
+    this.dialog.open(NewEmployeeDialogComponent);
   }
 }
 
