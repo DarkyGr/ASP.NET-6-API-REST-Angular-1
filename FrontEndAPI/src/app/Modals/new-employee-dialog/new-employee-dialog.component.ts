@@ -69,9 +69,25 @@ export class NewEmployeeDialogComponent implements OnInit {
     });
   }
 
-  newEmployee(){
-    console.log(this.employeeForm)
+  newEmployee(){    
     console.log(this.employeeForm.value)
+
+    const model: Employee = {
+      employeeId: 0,
+      employeeName: this.employeeForm.value.employeeName,
+      departmentId: this.employeeForm.value.departmentId,
+      salary: this.employeeForm.value.salary,
+      contractDate: moment(this.employeeForm.value.contractDate).format("DD/MM/YYYY")
+    }
+
+    this._employeeService.addEmployee(model).subscribe({
+      next:(data)=>{
+        this.showAlert("Employee was created successfully", "Ready");
+        this.referencesDialog.close("created");
+      },error:(e)=>{
+        this.showAlert("Employee could not be created", "Error");
+      }
+    })
   }
 
   ngOnInit(): void {
