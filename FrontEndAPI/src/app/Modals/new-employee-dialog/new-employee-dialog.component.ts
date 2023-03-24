@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -45,13 +45,14 @@ export class NewEmployeeDialogComponent implements OnInit {
     private fb:FormBuilder,
     private _snackBar: MatSnackBar,
     private _departmentService: DepartmentService,
-    private _employeeService: EmployeeService
+    private _employeeService: EmployeeService,
+    @Inject (MAT_DIALOG_DATA) public employeeData:Employee    // Save information
   ){
     this.employeeForm = this.fb.group({
-      employeeName: ["", Validators.required],
-      departmentId: ["", Validators.required],
-      salary: ["", Validators.required],
-      contractDate: ["", Validators.required],
+      employeeName: ['', Validators.required],
+      departmentId: ['', Validators.required],
+      salary: ['', Validators.required],
+      contractDate: ['', Validators.required],
     })
 
     this._departmentService.getList().subscribe({
@@ -80,18 +81,38 @@ export class NewEmployeeDialogComponent implements OnInit {
       contractDate: moment(this.employeeForm.value.contractDate).format("DD/MM/YYYY")
     }
 
-    this._employeeService.addEmployee(model).subscribe({
-      next:(data)=>{
-        this.showAlert("Employee was created successfully", "Ready");
-        this.referencesDialog.close("created");
-      },error:(e)=>{
-        this.showAlert("Employee could not be created", "Error");
-      }
-    })
+    if (this.employeeData == null) {    // If CREATED
+      this._employeeService.addEmployee(model).subscribe({
+        next:(data)=>{
+          this.showAlert("Employee was created successfully", "Ready");
+          this.referencesDialog.close("created");
+        },error:(e)=>{
+          this.showAlert("Employee could not be created", "Error");
+        }
+      })  
+    }else{    // If EDITED
+      this._employeeService.updateEmployee(this.employeeData.employeeId, model).subscribe({        
+        next:(data)=>{          
+          this.showAlert("Employee was edited successfully", "Ready");
+          this.referencesDialog.close("edited");
+        },error:(e)=>{          
+          this.showAlert("Employee could not be edited", "Error");
+        }
+      })  
+    }    
   }
 
   ngOnInit(): void {
-    
-  }
+    if (this.employeeData) {
+      this.employeeForm.patchValue({
+        employeeName: this.employeeData.employeeName,
+        departmentId:this.employeeData.departmentId,
+        salary: this.employeeData.salary,
+        contractDate: moment(this.employeeData.contractDate, 'DD/MM/YYYY')
+      })
 
+      this.actionTitle = "Edit"
+      this.actionBtn = "Update"
+    }    
+  }
 }

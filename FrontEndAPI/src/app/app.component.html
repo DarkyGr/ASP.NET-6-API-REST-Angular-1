@@ -42,8 +42,8 @@
       <!-- Accions Column -->
       <ng-container matColumnDef="Accions">
         <th mat-header-cell *matHeaderCellDef style="width: 80px;"> Accions </th>
-        <td mat-cell *matCellDef="let element" style="justify-content: center;">
-          <button mat-icon-button color="primary">
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="editEmployeeDialog(element)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn">

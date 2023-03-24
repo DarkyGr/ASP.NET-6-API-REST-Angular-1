@@ -2,7 +2,7 @@
 <div mat-dialog-content>
 
   <form [formGroup]="employeeForm">
-    <mat-grid-list cols="1" rowHeight="80px">
+    <mat-grid-list cols="1" rowHeight="100px">
       <mat-grid-tile>
         <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>Full Name</mat-label>
@@ -32,7 +32,7 @@
         <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>Contract Date</mat-label>
           <input matInput [matDatepicker]="picker" formControlName="contractDate">
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>

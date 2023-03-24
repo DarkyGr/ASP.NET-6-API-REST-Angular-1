@@ -42,18 +42,31 @@ export class AppComponent implements AfterViewInit, OnInit {
   showEmployees(){
     this._employeeServices.getList().subscribe({
       next:(dataResponse)=>{
-        console.log(dataResponse)
+        // console.log(dataResponse)
         this.dataSource.data = dataResponse;
       }, error:(e)=>{}
     })
   }
 
-  newEmployeeDialog() {
+  newEmployeeDialog() {    
     this.dialog.open(NewEmployeeDialogComponent,{
       disableClose:true,
       width:"350px"
     }).afterClosed().subscribe(result => {
       if (result === "created") {
+        this.showEmployees();
+      }
+    });    
+  }
+
+  editEmployeeDialog(employeeData: Employee) {
+    console.log(employeeData)
+    this.dialog.open(NewEmployeeDialogComponent,{
+      disableClose:true,
+      width:"350px",
+      data: employeeData
+    }).afterClosed().subscribe(result => {
+      if (result === "edited") {
         this.showEmployees();
       }
     });    
