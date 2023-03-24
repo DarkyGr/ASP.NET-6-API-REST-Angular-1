@@ -64,7 +64,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   editEmployeeDialog(employeeData: Employee) {
-    console.log(employeeData)
+    // console.log(employeeData)
     this.dialog.open(NewEmployeeDialogComponent,{
       disableClose:true,
       width:"350px",

@@ -71,7 +71,7 @@ export class NewEmployeeDialogComponent implements OnInit {
   }
 
   newEmployee(){    
-    console.log(this.employeeForm.value)
+    // console.log(this.employeeForm.value)
 
     const model: Employee = {
       employeeId: 0,
