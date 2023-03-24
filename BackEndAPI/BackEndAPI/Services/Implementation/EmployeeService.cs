@@ -36,7 +36,7 @@ namespace BackEndAPI.Services.Implementation
             {
                 Employee? employee = new Employee();    // Can to return null with "?"
 
-                employee = await _dbContext.Employees.Include(dpt => dpt.DepartmentId)
+                employee = await _dbContext.Employees.Include(dpt => dpt.Department)
                     .Where(e => e.EmployeeId == employeeId).FirstOrDefaultAsync();
 
                 return employee;
