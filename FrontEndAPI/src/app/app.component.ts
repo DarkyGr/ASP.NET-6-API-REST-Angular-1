@@ -6,8 +6,11 @@ import { Employee } from './Interfaces/employee';
 import { EmployeeService } from './Services/employee.service';
 
 import {MatDialog} from '@angular/material/dialog';
+import { DeleteEmployeeDialogComponent } from './Modals/delete-employee-dialog/delete-employee-dialog.component';
 
 import { NewEmployeeDialogComponent } from './Modals/new-employee-dialog/new-employee-dialog.component';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +25,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   constructor(
     private _employeeServices: EmployeeService,
-    public dialog: MatDialog){}
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     this.showEmployees();
@@ -70,5 +74,31 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.showEmployees();
       }
     });    
+  }
+
+  showAlert(msg: string, action: string) {
+    this._snackBar.open(msg, action,{
+      horizontalPosition: "end",
+      verticalPosition: "top",
+      duration: 3000
+    });
+  }
+
+  deleteEmployeeDialog(employeeData: Employee){
+    this.dialog.open(DeleteEmployeeDialogComponent,{
+      disableClose:true,
+      data: employeeData
+    }).afterClosed().subscribe(result => {
+      if (result === "deleted") {
+        this._employeeServices.deleteEmployee(employeeData.employeeId).subscribe({
+          next:(data)=>{
+            this.showAlert("Employee was deleted successfully", "Ready");
+            this.showEmployees();
+          },error:(e)=>{
+            this.showAlert("Employee could not be deleted", "Error");
+          }
+        })
+      }
+    });   
   }
 }
