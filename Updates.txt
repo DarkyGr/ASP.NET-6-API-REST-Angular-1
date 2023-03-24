@@ -3,3 +3,4 @@
 Test branch (FrontEndAPI Folder):
 - New Employee Modal running 
 - Edit Employee Modal running
+- Delete Employee Modal running 
